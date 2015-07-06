@@ -93,6 +93,12 @@ namespace MabiPale2.Plugins.CombatDumper
 		{
 			manager.AddToMenu(Name, OnClick);
 			manager.Recv += OnRecv;
+			manager.Clear += OnClear;
+		}
+
+		private void OnClear()
+		{
+			this.CombatActionsList.Clear();
 		}
 
 		private void OnClick(object sender, EventArgs e)
