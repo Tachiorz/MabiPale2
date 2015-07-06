@@ -109,7 +109,7 @@ namespace MabiPale2.Plugins.CombatDumper
 				{
 					const string delim = " ; ";
 					var sb = new StringBuilder();
-					sb.AppendLine("Time ; CombatID ; LinkedSceneID ; HitCount ; Type ; Flags ; BlockedByShieldPosX ; BlockedByShieldPosZ ; ShieldCasterId ; CombatID ; CharID ; Flags ; Stun ; SkillID ; SecondarySkillID ; targetID ; AttackerFlags ; UsedWeaponSet ; WeaponParameterType ; AttackPosX ; AttackPosY ; DashedPosX ; DashedPosY ; DashDelay ; Phase ; IndirectAttackerID ; DefenderFlags ; Damage ; Wound ; ManaDamage ; DirectionX ; DirectionY ; DownPosX ; DownPosY ; MultiHitDamageCount ; MultiHitDamageShowTime ; EffectFlags ; HitDelay ; AttackerID");
+					sb.AppendLine("Time ; CombatID ; LinkedSceneID ; HitCount ; Type ; Flags ; BlockedByShieldPosX ; BlockedByShieldPosZ ; ShieldCasterId ; CombatID ; CharID ; Flags ; Stun ; SkillID ; SecondarySkillID ; targetID ; AttackerFlags ; UsedWeaponSet ; WeaponParameterType ; AttackPosX ; AttackPosY ; DashedPosX ; DashedPosY ; DashDelay ; Phase ; IndirectAttackerID ; DefenderFlags ; Damage ; Wound ; ManaDamage ; DirectionX ; DirectionY ; DownPosX ; DownPosY ; Unknown ; MultiHitDamageCount ; MultiHitDamageShowTime ; EffectFlags ; HitDelay ; AttackerID");
 					foreach (var scene in this.CombatActionsList)
 						foreach (var combatant in scene.Combatants)
 						{
@@ -151,6 +151,7 @@ namespace MabiPale2.Plugins.CombatDumper
 							sbLine.Append(combatant.DirectionY); sbLine.Append(delim);
 							sbLine.Append(combatant.DownPosX); sbLine.Append(delim);
 							sbLine.Append(combatant.DownPosY); sbLine.Append(delim);
+							sbLine.Append(combatant.Unknown); sbLine.Append(delim);
 							sbLine.Append(combatant.MultiHitDamageCount); sbLine.Append(delim);
 							sbLine.Append(combatant.MultiHitDamageShowTime); sbLine.Append(delim);
 							sbLine.Append(Convert.ToString(combatant.EffectFlags, 2).PadLeft(8, '0')); sbLine.Append(delim);
@@ -230,7 +231,7 @@ namespace MabiPale2.Plugins.CombatDumper
 						{
 							combatant.DownPosX = combatantPacket.GetFloat();
 							combatant.DownPosY = combatantPacket.GetFloat();
-							//combatant.Unknown = combatantPacket.GetUInt();
+							combatant.Unknown = combatantPacket.GetUInt();
 						}
 						if ((combatant.DefenderFlags & 0x2000000) != 0)
 						{
